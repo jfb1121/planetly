@@ -1,6 +1,4 @@
 aniso8601==9.0.1
-apispec==5.1.1
-apispec-webframeworks==0.5.2
 asttokens==2.0.5
 atomicwrites==1.4.0
 attrs==21.4.0
@@ -13,8 +11,6 @@ dateutils==0.6.12
 decorator==5.1.1
 executing==0.8.2
 Flask==2.0.2
-flask-restplus==0.13.0
-flask-restx==0.5.1
 flask-swagger-ui==3.36.0
 gunicorn==20.1.0
 idna==3.3

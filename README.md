@@ -75,7 +75,10 @@ To test this application, you should run the following commands.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Make sure you are using a virtual env and have docker installed on the machine. 
+cd into the root directory of this repository and run the following commands. 
+
+NOTE: The script is meant for one time run and deletes all existing records in the database. 
 * docker
   ```
   docker-compose up -d 
@@ -92,7 +95,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- EXAMPLES -->
 ## EXAMPLES
 
-please refer to the docs hosted at localhost:5000/api/v1/docs/
+please refer to the docs hosted at localhost:5000/api/v1/docs/ (make sure that you have docker-compose up running )
 * 3.a:
   * Request:
     * curl
