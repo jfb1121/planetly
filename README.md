@@ -189,6 +189,10 @@ please refer to the docs hosted at localhost:5000/api/v1/docs/
   }
   ```
 
+## how long did it take??
+It took me 2 hours to code the whole application, I spent an additional 2 hours to find the best way to generate documentation automatically :smile:
+
+I ran into some issues with the local setup of docker on my machine as the previous installation had been corrupted somehow, apart from that I didn't really face any issues, except for best practices of a restful api as I have not developed them for over 2 years now, but it did show me how much more there is to learn about flask and RESTfulness in general. ;) 
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
