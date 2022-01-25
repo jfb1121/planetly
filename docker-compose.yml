@@ -3,6 +3,8 @@ version: '3.4'
 services:
   planetly:
     image: planetly
+    environment:
+      FLASK_APP: planetly
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -11,18 +13,17 @@ services:
     depends_on:
       - mongodb
   mongodb:
-    image: mongo:4.0.8
-    container_name: mongodb
-    restart: unless-stopped
-    command: mongod --auth
     environment:
-      MONGO_INITDB_ROOT_USERNAME: mongodbuser
-      MONGO_INITDB_ROOT_PASSWORD: your_mongodb_root_password
-      MONGO_INITDB_DATABASE: flaskdb
-      MONGODB_DATA_DIR: /data/db
-      MONDODB_LOG_DIR: /dev/null
+      MONGO_INITDB_DATABASE: assignment
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_ROOT_USERNAME: admin
+    image: mongo:4.4.11
+    ports:
+      - "27017:27017"
+    restart: always
     volumes:
-      - mongodbdata:/data/db
+      - ./mongo/data:/data/db
+
 
 # networks:
 #   frontend:
@@ -30,7 +31,4 @@ services:
 #   backend:
 #     driver: bridge
 
-volumes:
-  mongodbdata:
-    driver: local
 

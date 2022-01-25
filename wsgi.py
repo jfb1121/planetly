@@ -1,2 +1,2 @@
-from crud_app.app import app as application
-app = application
+from planetly import app as application
+app = application.init_app()
