@@ -44,13 +44,13 @@ This is a simple REST API built with flask and MongoDB.
 
   P.S: Any SQL database would have been a strong second with regards to other NoSql databases considered as most of them are key-value based strict databases. 
 
-  #### Code base structure
-  The code base tries to follow a strict separation of concerns principal.
-  The system is divided into 3 layers:
-    * View layer: responsible for dealing with request and response logic
-    * Service layer: complex business logic goes here, although there were not a lot
-    * I/O layer: Abstracts away any database or other form of I/O from the rest of the system.
-      * This allows us to change the database / models while maintaining the same interface to the service layer
+#### Code base structure
+The code base tries to follow a strict separation of concerns principal.
+The system is divided into 3 layers:
+* View layer: responsible for dealing with request and response logic
+* Service layer: complex business logic goes here, although there were not a lot
+* I/O layer: Abstracts away any database or other form of I/O from the rest of the system.
+  * This allows us to change the database / models while maintaining the same interface to the service layer
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
