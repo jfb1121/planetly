@@ -1,0 +1,385 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Temperature recording service",
+    "description": "This is a documentation for submisson of the coding challenge. \n",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "pjayeshbafna08@gmail.com"
+    },
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "localhost:5000"
+    }
+  ],
+  "paths": {
+    "/temperatures/": {
+      "get": {
+        "summary": "Lists all records (consider filtering ;))",
+        "description": "As of now the records are not paginated, would be a good addition.",
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "Date values that need to be considered for filter",
+            "required": true,
+            "style": "json",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2016-08-06"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "Date values that need to be considered for filter",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2026-08-06"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limits the number of records to the desired amount",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a temperature record in the database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecordRaw"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/temperatures/ChasingSummer": {
+      "get": {
+        "summary": "Finds warmest recorded average months historically",
+        "description": "love summer? find your next destination ;)",
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "Date values that need to be considered for filter",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2016-08-06"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "Date values that need to be considered for filter",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2026-08-06"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limits the number of records to the desired amount",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ListResponse"
+                  }
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/temperatures/{city_name}/{recording_date}": {
+      "get": {
+        "summary": "Get a single record by city name and date or record",
+        "description": "The record will only be returned if it exists.",
+        "parameters": [
+          {
+            "name": "city_name",
+            "in": "path",
+            "description": "name of the city",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "recording_date",
+            "in": "path",
+            "description": "date of the recorded temperature",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2026-08-06"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Record"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates a temperature record in the database",
+        "parameters": [
+          {
+            "name": "city_name",
+            "in": "path",
+            "description": "name of the city",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "recording_date",
+            "in": "path",
+            "description": "date of the recorded temperature",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2026-08-06"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/city_name_recording_date_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a temperature record in the database",
+        "parameters": [
+          {
+            "name": "city_name",
+            "in": "path",
+            "description": "name of the city",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "recording_date",
+            "in": "path",
+            "description": "date of the recorded temperature",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2026-08-06"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/city_name_recording_date_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ListResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Record"
+        }
+      },
+      "Record": {
+        "type": "object",
+        "properties": {
+          "average_temperature": {
+            "type": "number",
+            "example": 22
+          },
+          "average_temperature_uncertainty": {
+            "type": "number",
+            "example": 2
+          },
+          "city_name": {
+            "type": "string",
+            "example": "chennai"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2022-01-24T14:24:54.502+0000"
+          },
+          "id": {
+            "type": "string",
+            "example": "61eeb75244b9b698fa8b87f6"
+          },
+          "recording_date": {
+            "type": "string",
+            "example": "1990-01-21T00:00:00.000+0000"
+          }
+        }
+      },
+      "RecordRaw": {
+        "type": "object",
+        "properties": {
+          "average_temperature": {
+            "type": "number",
+            "example": 22
+          },
+          "average_temperature_uncertainty": {
+            "type": "number",
+            "example": 2
+          },
+          "city_name": {
+            "type": "string",
+            "example": "chennai"
+          },
+          "created_at": {
+            "type": "string",
+            "example": "2022-01-24T14:24:54.502+0000"
+          },
+          "id": {
+            "type": "string",
+            "example": "61eeb75244b9b698fa8b87f6"
+          },
+          "recording_date": {
+            "type": "string",
+            "example": "1990-01-21T00:00:00.000+0000"
+          }
+        }
+      },
+      "city_name_recording_date_body": {
+        "type": "object",
+        "properties": {
+          "average_temperature": {
+            "type": "number",
+            "description": "Updated average_temperature of the record",
+            "example": 22
+          },
+          "average_temperature_uncertainty": {
+            "type": "number",
+            "description": "Updated average_temperature_uncertaintys of the record",
+            "example": 0.1
+          }
+        }
+      }
+    }
+  }
+}
