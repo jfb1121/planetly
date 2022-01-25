@@ -79,6 +79,9 @@ Make sure you are using a virtual env and have docker installed on the machine.
 cd into the root directory of this repository and run the following commands. 
 
 NOTE: The script is meant for one time run and deletes all existing records in the database. 
+Please ensure the file sharing is for the folder of the project and subfolder is enabled,
+such that mongo can retain state. 
+For steps on how to do this, please search for "docker file sharing + {your os, windows / mac/ linux}
 * docker
   ```
   docker-compose up -d 
@@ -88,6 +91,7 @@ NOTE: The script is meant for one time run and deletes all existing records in t
   pip install -r requirements.txt
   python data_set_loader.py <path-to-csv> 
   ```
+* Done, the test API should be available on localhost:5000/
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
