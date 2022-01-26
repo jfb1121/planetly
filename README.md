@@ -52,6 +52,12 @@ The system is divided into 3 layers:
 * I/O layer: Abstracts away any database or other form of I/O from the rest of the system.
   * This allows us to change the database / models while maintaining the same interface to the service layer
 
+#### How the UI might consume these API's
+Although I have removed Country, Latitude and Longitude information this could be useful to render a neat map on the UI.
+The frontend could also create tables with records of a specfic city and multiple filter options to the end user. 
+
+They could also paginate the results (missing functionality in the current api).
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
